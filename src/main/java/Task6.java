@@ -28,24 +28,18 @@ public class Task6 {
         //**Find elements in the left menu**//
         List<WebElement> items = driver.findElements(By.xpath("//td[@id='sidebar']//div[@id='box-apps-menu-wrapper']//li[@id = 'app-']"));
         int size = items.size();
-
         for (int i=0; i<size; i++) {
             items = driver.findElements(By.xpath("//td[@id='sidebar']//div[@id='box-apps-menu-wrapper']//li[@id = 'app-']"));
             items.get(i).click();
             WebElement title = wait.until(presenceOfElementLocated(By.xpath("//td[@id='content']//h1")));
-
             boolean isElementPresent = driver.findElements(By.xpath("//td[@id='sidebar']//div[@id='box-apps-menu-wrapper']//li[@id = 'app-' and @class='selected']/ul[@class='docs']/li")).size() > 0;
-
-
             if (isElementPresent = true) {
                 List<WebElement> items_selected = driver.findElements(By.xpath("//td[@id='sidebar']//div[@id='box-apps-menu-wrapper']//li[@id = 'app-' and @class='selected']/ul[@class='docs']/li"));
                 int size1 = items_selected.size();
-
                 for (int j = 0; j<size1; j++){
                     items_selected = driver.findElements(By.xpath("//td[@id='sidebar']//div[@id='box-apps-menu-wrapper']//li[@id = 'app-' and @class='selected']/ul[@class='docs']/li"));
                     items_selected.get(j).click();
                     title = wait.until(presenceOfElementLocated(By.xpath("//td[@id='content']//h1")));
-
                                     }
             }
         }
