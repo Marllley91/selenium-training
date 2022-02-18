@@ -19,25 +19,20 @@ public class Task7 {
         //***Log in***//
 
         driver.navigate().to("http://localhost/litecart/en/");
-        List<WebElement> items = driver.findElements(By.xpath("//ul[@class='listing-wrapper products']/li[@class='product column shadow hover-light']//div[@class='image-wrapper']"));
+        List<WebElement> items = driver.findElements(By.xpath("//div[@class='image-wrapper']"));
         int size = items.size();
 
         for (int i = 0; i < size; i++) {
-            boolean hasSaleSticker = isElementPresent(items.get(i), By.xpath(".//div[@class='sticker sale']"));
-            boolean hasNewSticker = isElementPresent(items.get(i), By.xpath(".//div[@class='sticker new']"));
+            boolean hasSticker = isElementPresent(items.get(i), By.xpath(".//div[starts-with(@class,'sticker')]"));
 
-            if (!hasNewSticker && hasSaleSticker) {
-                System.out.println("Элемент с лейблом Sale");
-            } else if (hasNewSticker && !hasSaleSticker) {
-                System.out.println("Элемент с лейблом New");
-            } else {
-                System.out.println("Элемент имеет два лейбла");
+            if (hasSticker) {
+                System.out.println("Товар № " + i + " имеет один стикер");
+            }  else {
+                System.out.println("Элемент не имеет стикера");
             }
 
         }
-
-        //    driver.quit();
-
+            driver.quit();
     }
     static boolean isElementPresent(WebElement element, By locator) {
         try {
