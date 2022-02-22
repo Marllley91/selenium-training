@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class Task10 {
@@ -28,7 +29,7 @@ public class Task10 {
         //*Найти цвет, зачеркнутость и размер обычной цены*//
         WebElement color_main_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//s[@class='regular-price']"));
         String test_color_main_price =  color_main_price.getCssValue("color");
-        String test_style_main_price =  color_main_price.getCssValue("text-decoration");
+        String test_style_main_price =  color_main_price.getCssValue("text-decoration-style");
         String test_size_main_price =  color_main_price.getCssValue("font-size");
         //*Найти акционную цену продукта*//
         WebElement sale_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//strong[@class='campaign-price']"));
@@ -50,7 +51,7 @@ public class Task10 {
         //*Найти цвет, зачеркнутость и размер обычной цены продукта в новом окне*//
         WebElement color_product_main_price = driver.findElement(By.xpath("//div[@class='information']//s[@class='regular-price']"));
         String test_color_product_main_price =  color_product_main_price.getCssValue("color");
-        String test_style_product_main_price =  color_product_main_price.getCssValue("text-decoration");
+        String test_style_product_main_price =  color_product_main_price.getCssValue("text-decoration-style");
         String test_size_product_main_price =  color_product_main_price.getCssValue("font-size");
         //*Найти акционную цену продукта в новом окне*//
         WebElement product_sale_price = driver.findElement(By.xpath("//strong[@class='campaign-price']"));
@@ -86,15 +87,68 @@ public class Task10 {
             }
             System.out.println("Акционные цены товаров " + result);
         //*в) обычная цена зачёркнутая и серая (можно считать, что "серый" цвет это такой, у которого в RGBa представлении одинаковые значения для каналов R, G и B)*//
-            System.out.println("Цвет обычной цены на главной странице: " + test_color_main_price);
-            System.out.println("Форматирование обычной цены на главной странице: " + test_style_main_price);
-            System.out.println("Цвет обычной цены на новой странице: " + test_color_product_main_price);
-            System.out.println("Форматирование обычной цены на главной странице: " + test_style_product_main_price);
+            if (test_color_main_price.equals("rgb(119, 119, 119)")){
+                result= "серый";
+            }
+            else {
+                result= "не серый";
+            }
+            System.out.println("Цвет обычной цены на главной странице: " + result);
+            if (test_style_main_price.equals("solid")){
+                result= "зачеркнутый";
+            }
+            else {
+                result= "не зачеркнутый";
+            }
+            System.out.println("Шрифт обычной цены на главной странице: " + result);
+
+            if (test_color_product_main_price.equals("rgb(102, 102, 102)")){
+                result= "серый";
+            }
+            else {
+                result= "не серый";
+            }
+            System.out.println("Шрифт обычной цены на новой странице: " + result);
+            if (test_style_product_main_price.equals("solid")){
+                result= "зачеркнутый";
+            }
+            else {
+                result= "не зачеркнутый";
+            }
+            System.out.println("Форматирование обычной цены на новой странице: " + result);
+
+
         // *г) акционная жирная и красная*//
-            System.out.println("Цвет акционной цены на главной странице: " + test_color_sale_price);
-            System.out.println("Форматирование акционной цены на главной странице: " + test_weight_sale_price);
-            System.out.println("Цвет акционной цены на новой странице: " + test_color_product_sale_price);
-            System.out.println("Форматирование акционной цены на новой странице: " + test_weight_product_sale_price);
+            if (test_color_sale_price.equals("rgb(204, 0, 0)")){
+                result= "красный";
+            }
+            else {
+                result= "не красный";
+            }
+            System.out.println("Цвет акционной цены на главной странице: " + result);
+            if (test_weight_sale_price.equals("900")){
+                result= "жирный";
+            }
+            else {
+                result= "не жирный";
+            }
+            System.out.println("Шрифт акционной цены на главной странице: " + result);
+
+            if (test_color_product_sale_price.equals("rgb(204, 0, 0)")){
+                result= "красный";
+            }
+            else {
+                result= "не красный";
+            }
+            System.out.println("Цвет акционной цены на новой странице: " + result);
+            if (test_weight_product_sale_price.equals("700")){
+                result= "жирный";
+            }
+            else {
+                result= "не жирный";
+            }
+            System.out.println("Шрифт акционной цены на новой странице: " + result);
+
         //*д) акционная цена крупнее, чем обычная (это тоже надо проверить на каждой странице независимо)*//
             if (test_size_main_price.compareTo(test_size_sale_price)>0){
                  result = "больше";
