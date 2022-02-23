@@ -30,14 +30,14 @@ public class Task9 {
             int size1 = zone.size();
 
             List<String> all_countries = new ArrayList<>(); //*Массив будет использоваться, как массив со страницы по дефолту*//
-            List<String> all_countries_sort = new ArrayList<>(); //*Массив будет использоваться, как массив с сортировкой*//
 
             for (int j=0; j<size1; j++) {
                 zone = driver.findElements(By.xpath("//table[@id='table-zones']//td[3]//select[contains(@name,'zones[')]//option[@selected]"));
                 all_countries.add(zone.get(j).getText());
-                all_countries_sort.add(zone.get(j).getText());
-                Collections.sort(all_countries_sort);
             }
+
+            List<String> all_countries_sort = new ArrayList<>(all_countries); //*Массив будет использоваться, как массив с сортировкой*//
+            Collections.sort(all_countries_sort);
             //*Проверка алфавитного порядка стран на странице зоны*//
             for (int y=0; y<size1; y++) {
                 if (all_countries.get(y).equals(all_countries_sort.get(y))) {
