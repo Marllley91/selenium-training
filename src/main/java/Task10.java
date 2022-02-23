@@ -18,7 +18,6 @@ public class Task10 {
         WebDriverWait wait = new WebDriverWait(driver, 15);
         driver.manage().window().maximize();
         String result;
-
             //*Зайти на главную страницу*//
             driver.get("http://localhost/litecart/en/");
             //*Продукт на главной странице в блоке Campaigns*//
@@ -31,14 +30,12 @@ public class Task10 {
             WebElement main_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//s[@class='regular-price']"));
             String test_main_price = main_price.getAttribute("textContent");
             //*Найти цвет обычной цены*//
-
                 WebElement color_main_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//s[@class='regular-price']"));
                 String test_color_main_price = color_main_price.getCssValue("color");
                 String[] rgba = test_color_main_price.replace("rgb(", "").replace(")", "").split(", ");
                 int r = Integer.parseInt(rgba[0]);
                 int g = Integer.parseInt(rgba[1]);
                 int b = Integer.parseInt(rgba[2]);
-
             //*Найти зачеркнутость обычной цены*//
             String test_style_main_price = color_main_price.getCssValue("text-decoration-style");
             //*Найти размер обычной цены*//
@@ -97,7 +94,6 @@ public class Task10 {
             String test_size_product_sale_price = color_product_sale_price.getCssValue("font-size");
             String font_size_sale_product = test_size_product_sale_price.replaceAll("px", " ");
             double db_test_size_sale_product_price = Double.valueOf(font_size_sale_product);
-
             //*а) на главной странице и на странице товара сравнить, совпадает ли текст названия товара*//
             if (test_main_name.equals(test_product_name)) {
                 result = "совпадают";
