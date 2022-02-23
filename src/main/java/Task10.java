@@ -13,8 +13,8 @@ import java.text.ParseException;
 
 public class Task10 {
     public static void main(String[] args) throws ParseException {
-        System.setProperty("webdriver.gecko.driver", "C:\\project\\testselenium\\drivers\\geckodriver.exe");
-        WebDriver driver = new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "C:\\project\\testselenium\\drivers\\chromedriver.exe");
+        WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, 15);
         driver.manage().window().maximize();
         String result;
@@ -32,10 +32,11 @@ public class Task10 {
             //*Найти цвет обычной цены*//
                 WebElement color_main_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//s[@class='regular-price']"));
                 String test_color_main_price = color_main_price.getCssValue("color");
-                String[] rgba = test_color_main_price.replace("rgb(", "").replace(")", "").split(", ");
+                String[] rgba = test_color_main_price.replace("rgba(", "").replace(")", "").split(", ");
                 int r = Integer.parseInt(rgba[0]);
                 int g = Integer.parseInt(rgba[1]);
                 int b = Integer.parseInt(rgba[2]);
+                int a = Integer.parseInt(rgba[3]);
             //*Найти зачеркнутость обычной цены*//
             String test_style_main_price = color_main_price.getCssValue("text-decoration-style");
             //*Найти размер обычной цены*//
@@ -48,7 +49,7 @@ public class Task10 {
             //*Найти цвет акционной цены*//
             WebElement color_sale_price = driver.findElement(By.xpath("//div[@id='box-campaigns']//strong[@class='campaign-price']"));
             String test_color_sale_price = color_sale_price.getCssValue("color");
-            String[] rgba1 = test_color_sale_price.replace("rgb(", "").replace(")", "").split(", ");
+            String[] rgba1 = test_color_sale_price.replace("rgba(", "").replace(")", "").split(", ");
             int g1 = Integer.parseInt(rgba1[1]);
             int b1 = Integer.parseInt(rgba1[2]);
             //*Найти толщину акционной цены*//
@@ -69,10 +70,11 @@ public class Task10 {
             //*Найти цвет в новом окне*//
             WebElement color_product_main_price = driver.findElement(By.xpath("//div[@class='information']//s[@class='regular-price']"));
             String test_color_product_main_price = color_product_main_price.getCssValue("color");
-            String[] rgba2 = test_color_product_main_price.replace("rgb(", "").replace(")", "").split(", ");
+            String[] rgba2 = test_color_product_main_price.replace("rgba(", "").replace(")", "").split(", ");
             int r2 = Integer.parseInt(rgba2[0]);
             int g2 = Integer.parseInt(rgba2[1]);
             int b2 = Integer.parseInt(rgba2[2]);
+            int a2 = Integer.parseInt(rgba2[3]);
             //*Найти зачеркнутость обычной цены продукта в новом окне*//
             String test_style_product_main_price = color_product_main_price.getCssValue("text-decoration-style");
             //*Найти размер обычной цены продукта в новом окне*//
@@ -85,7 +87,7 @@ public class Task10 {
             //*Найти цвет акционной цены продукта в новом окне*//
             WebElement color_product_sale_price = driver.findElement(By.xpath("//strong[@class='campaign-price']"));
             String test_color_product_sale_price = color_product_sale_price.getCssValue("color");
-            String[] rgba3 = test_color_product_sale_price.replace("rgb(", "").replace(")", "").split(", ");
+            String[] rgba3 = test_color_product_sale_price.replace("rgba(", "").replace(")", "").split(", ");
             int g3 = Integer.parseInt(rgba3[1]);
             int b3 = Integer.parseInt(rgba3[2]);
             //*Найти толщину акционной цены продукта в новом окне*//
