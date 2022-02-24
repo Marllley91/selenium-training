@@ -37,7 +37,7 @@ public class Task11 {
         javascriptExecutor.executeScript("arguments[0].selectedIndex=11;arguments[0].dispatchEvent(new Event('change'));", zone);
         //******//
 
-        String email = "iuser_task11_test@example.com";
+        String email = "user_task11_test_11@example.com";
         driver.findElement(By.xpath("//input[@name='email']")).sendKeys(email);
         driver.findElement(By.xpath("//input[@name='phone']")).sendKeys("+177889955");
         String password = "111";
