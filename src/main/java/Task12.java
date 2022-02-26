@@ -60,12 +60,17 @@ public class Task12 {
         driver.findElement(By.xpath("//input[@name = 'purchase_price']")).sendKeys("25");
         Select currency = new Select(driver.findElement(By.xpath("//select[@name='purchase_price_currency_code']")));
         currency.selectByVisibleText("US Dollars");
+        driver.findElement(By.xpath("//input[@name = 'prices[USD]']")).sendKeys("30");
         driver.findElement(By.xpath("//button[@name='save']")).click();
+        //***Проверка наличия нового продукта в админке***//
+        driver.findElement(By.linkText("Product_name_test")).click();
+        sleep (1000);
+        //***Проверка наличия нового продукта в магазине***//
         driver.navigate().to("http://localhost/litecart/en/");
         JavascriptExecutor jse = (JavascriptExecutor)driver;
         jse.executeScript("window.scrollBy(0,500)");
         sleep (1000);
 
-   driver.quit();
+  // driver.quit();
     }
 }
