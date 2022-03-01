@@ -4,10 +4,12 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.List;
+
 
 public class Task13 {
     public static void main(String[] args) throws InterruptedException {
@@ -39,25 +41,14 @@ public class Task13 {
 
         //***Перейти в корзину***//
         driver.findElement(By.linkText("Checkout »")).click();
-        List <WebElement> products_for_delete = driver.findElements(By.xpath("//div[@id='checkout-cart-wrapper']//form[@name='cart_form']"));
-        int size1 = products_for_delete.size();
-        WebElement table = driver.findElement(By.xpath("//div[@id='box-checkout-summary']//table"));
-        WebElement no_items = driver.findElement(By.xpath("//div[@id='checkout-cart-wrapper']//p"));
-        for (int j=0; j<3; j++) {
-            //products_for_delete = driver.findElements(By.xpath("//form[@name='cart_form']"));
-            try {
-                while (driver.findElement(By.xpath("//button[@name='remove_cart_item']")).isEnabled()) {
-                    driver.findElement(By.xpath("//button[@name='remove_cart_item']")).click();
-                    wait.until(ExpectedConditions.stalenessOf(table));
-                }
-                Assert.assertTrue(no_items.getText().equals("There are no items in your cart."));
-            }
-            catch (Exception ex) {
-            }
-
+        while (driver.findElements(By.xpath("//button[@name='remove_cart_item']")).size() != 0) {
+            WebElement remove_button = driver.findElement(By.xpath("//button[@name='remove_cart_item']"));
+            remove_button.click();
+            wait.until(ExpectedConditions.stalenessOf(remove_button));
         }
-
+        Assert.assertTrue(driver.findElement(By.tagName("p")).getText().contains("There are no items in your cart."));
         driver.quit();
     }
-
 }
+
+
