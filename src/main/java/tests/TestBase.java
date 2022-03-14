@@ -1,12 +1,12 @@
 package tests;
 import app.Application;
-import org.junit.Before;
+import org.testng.annotations.BeforeClass;
 
 public class TestBase {
     public static ThreadLocal<Application> tlApp = new ThreadLocal<>();
     public Application app;
 
-    @Before
+    @BeforeClass
     public void start() {
         if (tlApp.get() != null) {
             app = tlApp.get();

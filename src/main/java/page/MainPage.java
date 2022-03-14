@@ -8,13 +8,15 @@ public class MainPage extends PageBase{
         super (driver);
     }
     public void open() {
-        driver.get("http://localhost/litecart/en");
+        driver.get("http://localhost/litecart/en/");
     }
-    public void chooseProduct(String s) {
-        driver.findElement(By.xpath("By.xpath(\"//div[@id='box-most-popular']//li/a[1]\")")).click();
+
+    public void chooseProduct(String name) {
+        driver.findElement(By.xpath("//div[@id='box-most-popular']//li/a[1]")).click();
     }
-    public void addProductsToCart (List<String> productsList){
-        for(int i = 0; i < 3; i++) {
+
+    public void addProductToCart (List<String> productsList){
+        for (int i = 0; i < 3; i++) {
             chooseProduct(productsList.get(i));
             new ProductPage(driver).addProductToCart();
             new ShopCart(driver).isProductAdded(i + 1);
